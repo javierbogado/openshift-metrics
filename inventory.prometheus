@@ -1,0 +1,29 @@
+
+# PROMETHEUS
+
+openshift_hosted_prometheus_deploy=True
+openshift_prometheus_namespace=openshift-metrics
+openshift_prometheus_node_selector={'region':'infra'}
+openshift_prometheus_args = ['--web.enable-lifecycle', '--storage.tsdb.retention=45d', '--storage.tsdb.min-block-duration=15m', '--storage.tsdb.max-block-duration=60m']
+openshift_prometheus_node_exporter_image_version={{ openshift_image_tag }}
+
+openshift_prometheus_storage_type=pvc
+openshift_prometheus_pvc_name=ocp-np-prometheus-claim
+openshift_prometheus_pvc_size=150Gi
+openshift_prometheus_pvc_access_modes=["ReadWriteOnce"]
+openshift_prometheus_pvc_pv_selector={"storage":"prometheus"}
+
+openshift_prometheus_alertmanager_storage_type=pvc
+openshift_prometheus_alertmanager_pvc_name=ocp-np-alertmanager-claim
+openshift_prometheus_alertmanager_pvc_size=5Gi
+openshift_prometheus_alertmanager_pvc_access_modes=["ReadWriteOnce"]
+openshift_prometheus_alertmanager_pvc_pv_selector={ "storage": "alertmanager" }
+
+openshift_prometheus_alertbuffer_storage_type=pvc
+openshift_prometheus_alertbuffer_pvc_name=ocp-np-alertbuffer-claim
+openshift_prometheus_alertbuffer_pvc_size=5Gi
+openshift_prometheus_alertbuffer_pvc_access_modes=["ReadWriteOnce"]
+openshift_prometheus_alertbuffer_pvc_pv_selector={ "storage": "alertbuffer" }
+
+
+# INVENTORY_FILE= ansible-playbook -vvv -i ${INVENTORY_FILE} playbooks/openshift-prometheus/config.yml

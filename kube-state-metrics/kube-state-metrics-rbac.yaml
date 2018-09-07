@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: kube-state-metrics
+ namespace: openshift-metrics
+---
+apiVersion: v1
+kind: ClusterRoleBinding
+metadata:
+  name: kube-state-metrics-rbac
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: kube-state-metrics
+  namespace: openshift-metrics

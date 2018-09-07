@@ -1,0 +1,7 @@
+# GRAFANA
+
+openshift_grafana_storage_type=pvc
+openshift_grafana_pvc_name=ocp-np-grafana-claim
+openshift_grafana_pvc_size=5Gi
+openshift_grafana_pvc_access_modes=["ReadWriteOnce"]
+openshift_grafana_pvc_pv_selector={ "storage": "grafana" }
