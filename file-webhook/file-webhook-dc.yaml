@@ -10,9 +10,16 @@ spec:
       labels:
         name: file-webhook
     spec:
+      volumes:
+      - name: file-webhook-data
+        persistentVolumeClaim:
+          claimName: file-webhook-claim
       containers:
       - name: file-webhook
         image: docker.io/redhatcsargentina/file-webhook:v1.0.0
         imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: file-webhook-data
+          mountPath: /opt/app-root/src/logs
         Ports:
         - containerPort: 8080
