@@ -1,0 +1,34 @@
+global:
+  # The sender address.
+  smtp_from: 'Prometheus <prometheus@companyname.com>'
+
+  # The SMTP host through which emails are sent.
+  smtp_smarthost: smtp.companyname.com:25
+
+  # The hostname to identify to the SMTP server.
+  smtp_hello: companyname
+
+  # The SMTP TLS requirement.
+  smtp_require_tls: false
+
+  # SMTP authentication information.
+  # [ auth_username: <string> | default = global.smtp_auth_username ]
+  # [ auth_password: <secret> | default = global.smtp_auth_password ]
+  # [ auth_secret: <secret> | default = global.smtp_auth_secret ]
+  # [ auth_identity: <string> | default = global.smtp_auth_identity ]
+
+route:
+  group_by: [alertname]
+  receiver: email-notifications
+
+receivers:
+- name: email-notifications
+  email_configs:
+    # The email address to send notifications to.
+  - to: username@companyname.com
+
+    # The text body of the email notification.
+    text: "Test mail"
+
+    # The HTML body of the email notification.
+    # html: <tmpl_string>

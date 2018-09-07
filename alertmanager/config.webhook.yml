@@ -1,0 +1,17 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: [alertname]
+  receiver: file-notification
+
+receivers:
+- name: file-notification
+  webhook_configs:
+    # The endpoint to send HTTP POST requests to.
+  - url: 'http://file-webhook:8080/'
+
+    # Whether or not to notify about resolved alerts.
+    send_resolved: true
+
+# ref: http://akrambenaissi.com/2017/11/log-prometheus-alerts-in-a-file-when-monitoring-openshift
