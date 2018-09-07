@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: file-webhook
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: file-webhook
+    spec:
+      containers:
+      - name: file-webhook
+        image: docker.io/redhatcsargentina/file-webhook:v1.0.0
+        imagePullPolicy: IfNotPresent
+        Ports:
+        - containerPort: 8080
